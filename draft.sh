@@ -73,7 +73,7 @@ echo "   Telephony data set."
 echo "3. Setting GPS Location..."
 
 # Use the 'geo fix' command (format is <longitude> <latitude>)
-adb emu geo fix "$GPS_LONGITUDE" "$GPS_LATITUDE"
+adb geo fix "$GPS_LONGITUDE" "$GPS_LATITUDE"
 
 echo "--- Spoofing Complete ---"
 
