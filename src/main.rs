@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::{panic::RefUnwindSafe, process::exit};
+use std::{process::exit};
 
 use clap::Parser;
 
@@ -65,6 +65,8 @@ fn get_prop(prop: &str) -> String {
         .expect("Failed to execute adb command");
     if !status.success() {
         eprintln!("Failed to get property {}", prop);
+    } else {
+        println!("{}: {}", prop, status.stdout_str().trim());
     }
     status.stdout_str()
 }
@@ -130,11 +132,11 @@ fn main() {
 
     // Display new settings
     println!("--- New Settings Applied ---");
-    println!("Locate successfully set to {}",get_prop("persist.sys.locale"));
-    println!("Language successfully set to {}",get_prop("persist.sys.language"));
-    println!("Country successfully set to {}",get_prop("persist.sys.country"));
-    println!("ISO Country successfully set to {}",get_prop("gsm.sim.operator.iso-country"));
-    println!("MCC/MNC successfully set to {}",get_prop("gsm.sim.operator.numeric"));
+    get_prop("persist.sys.locale");
+    get_prop("persist.sys.language");
+    get_prop("persist.sys.country");
+    get_prop("gsm.sim.operator.iso-country");
+    get_prop("gsm.sim.operator.numeric");
 
     println!("--- Spoofing Complete ---");
 }
